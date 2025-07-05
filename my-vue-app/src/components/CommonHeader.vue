@@ -1,7 +1,17 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { useAllDataStore } from '@/stores'
 const getImageUrl = (user) => {
     return new URL(`../assets/images/${user}.png`, import.meta.url).href
+}
+
+const store = useAllDataStore()
+
+
+const handleCollapse = () => {
+
+    store.isCollapse = !store.isCollapse
+
 }
 </script>
 
@@ -12,7 +22,7 @@ const getImageUrl = (user) => {
         <div class="l-content">
 
             <!-- 这个点击事件是控制菜单组件的收缩的-->
-            <el-button size="small">
+            <el-button size="small" @click="handleCollapse">
                 <!-- 图标的展示,这里我们使用动态组件来展示图标-->
                 <component class="icons" is="menu"></component>
             </el-button>
