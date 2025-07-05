@@ -1,3 +1,7 @@
+<script setup>
+import CommonAside from '@/components/CommonAside.vue'
+</script>
+
 <template>
     <div class="common-layout">
         <el-container class="lay-container">
@@ -14,8 +18,7 @@
     </div>
 </template>
 
-<script setup>
-</script>
+
 
 <style lang="less" scoped>
 .common-layout,
