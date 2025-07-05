@@ -1,19 +1,29 @@
 <template>
-    <div>
-        我是main组件
-        <el-button>Default</el-button>
-        <el-button type="primary">Primary</el-button>
-        <el-button type="success">Success</el-button>
-        <el-button type="info">Info</el-button>
-        <el-button type="warning">Warning</el-button>
-        <el-button type="danger">Danger</el-button>
-        <el-icon :size="size" :color="color">
-            <Edit />
-        </el-icon>
+    <div class="common-layout">
+        <el-container class="lay-container">
+            <common-aside />
+            <el-container>
+                <el-header class="el-header">
+                    <common-header />
+                </el-header>
+                <el-main class="right-main">
+                    main
+                </el-main>
+            </el-container>
+        </el-container>
     </div>
 </template>
 
 <script setup>
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.common-layout,
+.lay-container {
+    height: 100%;
+}
+
+.el-header {
+    background-color: #333;
+}
+</style>
