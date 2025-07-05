@@ -7,6 +7,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 
 import { pinia } from './stores'
+import '@/api/mock'
 
 
 const app = createApp(App)
