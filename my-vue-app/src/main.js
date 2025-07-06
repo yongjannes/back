@@ -8,9 +8,12 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import { pinia } from './stores'
 import '@/api/mock'
+import api from '@/api/api'
 
 
 const app = createApp(App)
+
+app.config.globalProperties.$api = api
 
 app.use(router).use(pinia).mount('#app')
 
