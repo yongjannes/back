@@ -10,6 +10,7 @@ export default {
         return request({
             url: '/home/getTableData',
             method: 'get',
+            mock: false
         })
     }
 
