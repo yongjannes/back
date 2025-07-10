@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useAllDataStore } from '@/stores'
+import { useRouter } from 'vue-router';
 const getImageUrl = (user) => {
     return new URL(`../assets/images/${user}.png`, import.meta.url).href
 }
@@ -12,6 +13,16 @@ const handleCollapse = () => {
 
     store.isCollapse = !store.isCollapse
 
+}
+
+const router = useRouter()
+
+//之前定义过
+const handleLoginOut = () => {
+    //执行重置方法
+    store.clearn()
+
+    router.push("/login")
 }
 </script>
 
@@ -47,7 +58,7 @@ const handleCollapse = () => {
                 <template #dropdown>
                     <el-dropdown-menu>
                         <el-dropdown-item>个人中心</el-dropdown-item>
-                        <el-dropdown-item>退出</el-dropdown-item>
+                        <el-dropdown-item @click="handleLoginOut">退出</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>

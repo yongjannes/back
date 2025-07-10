@@ -2,60 +2,68 @@
 import { ref, computed } from 'vue'
 import { useAllDataStore } from '@/stores'
 import { useRouter, useRoute } from 'vue-router'
-const list = ref([
-    {
-        path: '/home',
-        name: 'home',
-        label: '首页',
-        icon: 'house',
-        url: 'Home'
-    },
-    {
-        path: '/mall',
-        name: 'mall',
-        label: '商品管理',
-        icon: 'video-play',
-        url: 'Mall'
-    },
-    {
-        path: '/user',
-        name: 'user',
-        label: '用户管理',
-        icon: 'user',
-        url: 'User'
-    },
-    {
-        path: 'other',
-        label: '其他',
-        icon: 'location',
-        children: [
-            {
-                path: '/page1',
-                name: 'page1',
-                label: '页面1',
-                icon: 'setting',
-                url: 'Page1'
-            },
-            {
-                path: '/page2',
-                name: 'page2',
-                label: '页面2',
-                icon: 'setting',
-                url: 'Page2'
-            }
-        ]
-    }
-])
+const store = useAllDataStore()
+
+
+// const list = ref([
+//     {
+//         path: '/home',
+//         name: 'home',
+//         label: '首页',
+//         icon: 'house',
+//         url: 'Home'
+//     },
+//     {
+//         path: '/mall',
+//         name: 'mall',
+//         label: '商品管理',
+//         icon: 'video-play',
+//         url: 'Mall'
+//     },
+//     {
+//         path: '/user',
+//         name: 'user',
+//         label: '用户管理',
+//         icon: 'user',
+//         url: 'User'
+//     },
+//     {
+//         path: 'other',
+//         label: '其他',
+//         icon: 'location',
+//         children: [
+//             {
+//                 path: '/page1',
+//                 name: 'page1',
+//                 label: '页面1',
+//                 icon: 'setting',
+//                 url: 'Page1'
+//             },
+//             {
+//                 path: '/page2',
+//                 name: 'page2',
+//                 label: '页面2',
+//                 icon: 'setting',
+//                 url: 'Page2'
+//             }
+//         ]
+//     }
+// ])
+const list = computed(() => store.menuList)
+
 const noChildren = computed(() => list.value.filter(item => !item.children))
 const hasChildren = computed(() => list.value.filter(item => item.children))
 
-const store = useAllDataStore()
+
 
 const isCollapse = computed(() => store.isCollapse)
 const width = computed(() => isCollapse.value ? '64px' : '200px')
 
 const router = useRouter()
 const route = useRoute()
+
+//获取到当前路由的path
+const activeMenu = computed(() => route.path)
 const handleMenu = (item) => {
     router.push(item.path)
     store.selectMenu(item)
@@ -64,7 +72,7 @@ const handleMenu = (item) => {
 
 <template>
     <el-aside :width="width">
-        <el-menu background-color="#545c64" text-color="#fff" :collapse="isCollapse">
+        <el-menu background-color="#545c64" text-color="#fff" :collapse="isCollapse" :default-active="activeMenu">
             <h3 v-show="!isCollapse">通用后台管理系统</h3>
             <h3 v-show="isCollapse">后台</h3>
             <el-menu-item v-for="item in noChildren" :index="item.path" :key="item.path" @click="handleMenu(item)"
