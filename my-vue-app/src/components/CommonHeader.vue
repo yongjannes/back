@@ -24,6 +24,8 @@ const handleLoginOut = () => {
 
     router.push("/login")
 }
+
+const current = computed(() => store.currentMenu)
 </script>
 
 <template>
@@ -42,6 +44,7 @@ const handleLoginOut = () => {
             <el-breadcrumb separator="/" class="bread">
                 <!-- 首页是一定存在的所以直接写死 -->
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                <el-breadcrumb-item v-if="current" :to="current.path">{{ current.label }}</el-breadcrumb-item>
                 <!-- if判断一定要加-->
 
 
