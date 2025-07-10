@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useAllDataStore } from '@/stores'
+import { useRouter, useRoute } from 'vue-router'
 const list = ref([
     {
         path: '/home',
@@ -52,14 +53,22 @@ const store = useAllDataStore()
 
 const isCollapse = computed(() => store.isCollapse)
 const width = computed(() => isCollapse.value ? '64px' : '200px')
+
+const router = useRouter()
+const route = useRoute()
+const handleMenu = (item) => {
+    router.push(item.path)
+    store.selectMenu(item)
+}
 </script>
 
 <template>
     <el-aside :width="width">
-        <el-menu background-color="#545c64" text-color="#fff" :collapse="isCollapse" router>
+        <el-menu background-color="#545c64" text-color="#fff" :collapse="isCollapse">
             <h3 v-show="!isCollapse">通用后台管理系统</h3>
             <h3 v-show="isCollapse">后台</h3>
-            <el-menu-item v-for="item in noChildren" :index="item.path" :key="item.path">
+            <el-menu-item v-for="item in noChildren" :index="item.path" :key="item.path" @click="handleMenu(item)"
+                :default-active="route.path === item.path">
 
                 <component class="icons" :is="item.icon"></component>
                 <span>{{ item.label }}</span>
@@ -71,7 +80,7 @@ const width = computed(() => isCollapse.value ? '64px' : '200px')
                 </template>
                 <el-menu-item-group>
                     <el-menu-item v-for="(subItem, subIndex) in item.children" :index="subItem.path"
-                        :key="subItem.path">
+                        @click="handleMenu(subItem)" :key="subItem.path">
                         <component class="icons" :is="subItem.icon"></component>
                         <span>{{ subItem.label }}</span>
                     </el-menu-item>
