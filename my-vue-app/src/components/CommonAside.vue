@@ -56,7 +56,7 @@ const width = computed(() => isCollapse.value ? '64px' : '200px')
 
 <template>
     <el-aside :width="width">
-        <el-menu background-color="#545c64" text-color="#fff" :collapse="isCollapse">
+        <el-menu background-color="#545c64" text-color="#fff" :collapse="isCollapse" router>
             <h3 v-show="!isCollapse">通用后台管理系统</h3>
             <h3 v-show="isCollapse">后台</h3>
             <el-menu-item v-for="item in noChildren" :index="item.path" :key="item.path">
