@@ -12,7 +12,7 @@ import CommonHeader from '@/components/CommonHeader.vue'
                     <common-header />
                 </el-header>
                 <el-main class="right-main">
-                    <router-view />
+                    <Suspense> <router-view /> </Suspense>
                 </el-main>
             </el-container>
         </el-container>

@@ -24,6 +24,34 @@ export default {
             method: 'get',
         })
     },
+    getUserData(params) {
+        return request({
+            url: '/user/getUserData',
+            method: 'get',
+            data: params
+        })
+    },
+    deleteUser(params) {
+        return request({
+            url: '/user/deleteUser',
+            method: 'get',
+            data: params
+        })
+    },
+    addUser(params) {
+        return request({
+            url: '/user/addUser',
+            method: 'post',
+            data: params
+        })
+    },
+    editUser(params) {
+        return request({
+            url: '/user/editUser',
+            method: 'post',
+            data: params
+        })
+    },
 
 
 }

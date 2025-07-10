@@ -13,6 +13,12 @@ const routes = [
                 path: 'home',
                 name: 'home',
                 component: () => import('@/views/Home.vue'),
+            },
+            //添加用户管理
+            {
+                path: 'user',
+                name: 'user',
+                component: () => import('@/views/User.vue')
             }
         ]
     }
